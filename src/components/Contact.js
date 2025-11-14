@@ -21,9 +21,9 @@ function Contact() {
         </svg>
       ),
       title: 'Call Us',
-      value: '+1 (888) 123-4567',
+      value: '+977 (986) 877-2852',
       subtext: 'Mon-Fri, 9AM-6PM EST',
-      link: 'tel:+18881234567',
+      link: 'tel:+9779868772852',
       color: 'from-green-500 to-green-600'
     },
     {
@@ -34,8 +34,8 @@ function Contact() {
         </svg>
       ),
       title: 'Visit Us',
-      value: '123 Healthcare Ave',
-      subtext: 'San Francisco, CA 94102',
+      value: '44600 Physiohub ktm.',
+      subtext: 'Kathmandu, Nepal 44600',
       link: '#',
       color: 'from-purple-500 to-purple-600'
     },
