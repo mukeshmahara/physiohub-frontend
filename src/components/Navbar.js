@@ -41,9 +41,7 @@ function Navbar() {
           <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+                <img src="/3dlogo.jpeg" alt="PhysioHub Logo" className="w-6 h-6 border rounded-full object-contain" />
               </div>
               <span
                 className={`text-2xl font-bold transition-colors ${

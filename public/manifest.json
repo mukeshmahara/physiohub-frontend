@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+    "name": "Physio React Pvt Ltd",
+  "short_name": "PhysioApp",
+  "description": "A physiotherapy management app",
+  
   "icons": [
     {
       "src": "favicon.ico",

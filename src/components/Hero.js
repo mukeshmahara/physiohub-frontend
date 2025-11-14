@@ -10,6 +10,8 @@ function Hero() {
     }
   };
 
+  const logo = '/logo512.png'; // Path to the logo image
+
   return (
     <section className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white overflow-hidden">
       {/* Animated Background Elements */}
@@ -93,36 +95,11 @@ function Hero() {
               
               {/* Main Card */}
               <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-transform duration-500">
-                <div className="space-y-6">
-                  {/* Mock Dashboard Elements */}
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent-400 to-accent-600 rounded-2xl flex items-center justify-center">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
-                      <div className="h-3 bg-gray-100 rounded w-24"></div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                        <div className="w-3 h-3 bg-accent-500 rounded-full animate-pulse"></div>
-                        <div className="flex-1">
-                          <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
-                          <div className="h-2 bg-gray-100 rounded w-3/4"></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="pt-4 border-t border-gray-200">
-                    <div className="h-32 bg-gradient-to-r from-primary-100 to-accent-100 rounded-xl"></div>
-                  </div>
-                </div>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="object-contain rounded-2xl h-full w-full mx-auto p-4"
+                />
               </div>
             </div>
           </div>
