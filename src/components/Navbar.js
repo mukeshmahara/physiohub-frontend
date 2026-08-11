@@ -1,54 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [authMode, setAuthMode] = useState("login"); // 'login' or 'signup'
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: "smooth" });
       setIsMobileMenuOpen(false);
     }
   };
 
   const navLinks = [
-    { name: 'Features', action: () => scrollToSection('features-section') },
-    { name: 'Demo', action: () => scrollToSection('demo-section') },
-    { name: 'Contact', action: () => scrollToSection('contact-section') },
+    { name: "Features", action: () => scrollToSection("features-section") },
+    { name: "Demo", action: () => scrollToSection("demo-section") },
+    { name: "Contact", action: () => scrollToSection("contact-section") },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white shadow-lg backdrop-blur-lg bg-opacity-95'
-          : 'bg-transparent'
+          ? "bg-white shadow-lg backdrop-blur-lg bg-opacity-95"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div
+            className="flex-shrink-0 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
-                <img src="/3dlogo.jpeg" alt="PhysioHub Logo" className="w-6 h-6 border rounded-full object-contain" />
+                <img
+                  src="/3dlogo.jpeg"
+                  alt="PhysioHub Logo"
+                  className="w-6 h-6 border rounded-full object-contain"
+                />
               </div>
               <span
                 className={`text-2xl font-bold transition-colors ${
-                  isScrolled ? 'text-gray-900' : 'text-white'
+                  isScrolled ? "text-gray-900" : "text-white"
                 }`}
               >
-                Physio<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">Hub</span>
+                Physio
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">
+                  Hub
+                </span>
               </span>
             </div>
           </div>
@@ -60,18 +73,38 @@ function Navbar() {
                 key={index}
                 onClick={link.action}
                 className={`font-semibold transition-colors hover:text-accent-500 ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
+                  isScrolled ? "text-gray-700" : "text-white"
                 }`}
               >
                 {link.name}
               </button>
             ))}
-            <button
-              onClick={() => scrollToSection('demo-section')}
-              className="px-6 py-2.5 bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-            >
-              Get Started
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() =>
+                  setAuthMode((m) => (m === "login" ? "signup" : "login"))
+                }
+                title="Toggle Login / Sign Up"
+                className={`px-3 py-1.5 rounded-full border font-medium text-sm transition-colors ${
+                  isScrolled
+                    ? "text-gray-700 border-gray-200 bg-white"
+                    : "text-white border-white/30 bg-transparent"
+                }`}
+              >
+                {authMode === "login" ? "Login" : "Sign Up"}
+              </button>
+
+              <button
+                onClick={() =>
+                  authMode === "login"
+                    ? navigate("/login")
+                    : navigate("/signup")
+                }
+                className="px-6 py-2.5 bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              >
+                {authMode === "login" ? "Continue to Login" : "Create Account"}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -79,14 +112,31 @@ function Navbar() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 rounded-lg transition-colors ${
-                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white hover:bg-opacity-10'
+                isScrolled
+                  ? "text-gray-700 hover:bg-gray-100"
+                  : "text-white hover:bg-white hover:bg-opacity-10"
               }`}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 {isMobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
@@ -97,7 +147,7 @@ function Navbar() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-white shadow-lg border-t border-gray-100">
@@ -111,12 +161,31 @@ function Navbar() {
                 {link.name}
               </button>
             ))}
-            <button
-              onClick={() => scrollToSection('demo-section')}
-              className="block w-full px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg shadow-lg text-center"
-            >
-              Get Started
-            </button>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() =>
+                    setAuthMode((m) => (m === "login" ? "signup" : "login"))
+                  }
+                  className="flex-1 px-4 py-2 rounded-full border text-sm font-medium text-gray-700 bg-white"
+                >
+                  {authMode === "login" ? "Login" : "Sign Up"}
+                </button>
+
+                <button
+                  onClick={() =>
+                    authMode === "login"
+                      ? navigate("/login")
+                      : navigate("/signup")
+                  }
+                  className="flex-1 px-4 py-2 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg shadow-lg text-center"
+                >
+                  {authMode === "login"
+                    ? "Continue to Login"
+                    : "Create Account"}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
