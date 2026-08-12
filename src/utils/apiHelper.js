@@ -6,7 +6,7 @@
 
 // Default Configuration
 const DEFAULT_CONFIG = {
-  baseURL: process.env.REACT_APP_API_BASE_URL || "https://api.physiohub.com/v1",
+  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api",
   timeout: 30000, // 30 seconds
   headers: {
     "Content-Type": "application/json",
