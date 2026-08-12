@@ -16,4 +16,5 @@ export const publicRoutes = [
 // Private routes (render behind a ProtectedRoute wrapper)
 export const privateRoutes = [{ path: "/demo", component: DemoForm }];
 
-export default { publicRoutes, privateRoutes };
+const routesConfig = { publicRoutes, privateRoutes };
+export default routesConfig;
