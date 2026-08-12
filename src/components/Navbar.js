@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [authMode, setAuthMode] = useState("login"); // 'login' or 'signup'
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,12 +18,48 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
+  // Handle section scrolling when location.state has scrollTo
+  useEffect(() => {
+    if (isHomePage && location.state?.scrollTo) {
+      const sectionId = location.state.scrollTo;
+      const timer = setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
+  }, [isHomePage, location]);
+
+  const handleLogoClick = () => {
+    if (!isHomePage) {
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const scrollToSection = (sectionId) => {
+    if (!isHomePage) {
+      navigate("/", { state: { scrollTo: sectionId } });
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    setIsMobileMenuOpen(false);
+    navigate("/login");
+  };
+
+  const handleDemoClick = () => {
+    scrollToSection("demo-section");
   };
 
   const navLinks = [
@@ -30,10 +68,12 @@ function Navbar() {
     { name: "Contact", action: () => scrollToSection("contact-section") },
   ];
 
+  const isSolid = isScrolled || !isHomePage;
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isSolid
           ? "bg-white shadow-lg backdrop-blur-lg bg-opacity-95"
           : "bg-transparent"
       }`}
@@ -43,7 +83,7 @@ function Navbar() {
           {/* Logo */}
           <div
             className="flex-shrink-0 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={handleLogoClick}
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
@@ -55,7 +95,7 @@ function Navbar() {
               </div>
               <span
                 className={`text-2xl font-bold transition-colors ${
-                  isScrolled ? "text-gray-900" : "text-white"
+                  isSolid ? "text-gray-900" : "text-white"
                 }`}
               >
                 Physio
@@ -73,7 +113,7 @@ function Navbar() {
                 key={index}
                 onClick={link.action}
                 className={`font-semibold transition-colors hover:text-accent-500 ${
-                  isScrolled ? "text-gray-700" : "text-white"
+                  isSolid ? "text-gray-700" : "text-white"
                 }`}
               >
                 {link.name}
@@ -81,28 +121,23 @@ function Navbar() {
             ))}
             <div className="flex items-center gap-3">
               <button
-                onClick={() =>
-                  setAuthMode((m) => (m === "login" ? "signup" : "login"))
-                }
-                title="Toggle Login / Sign Up"
-                className={`px-3 py-1.5 rounded-full border font-medium text-sm transition-colors ${
-                  isScrolled
-                    ? "text-gray-700 border-gray-200 bg-white"
-                    : "text-white border-white/30 bg-transparent"
+                onClick={handleLoginClick}
+                className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-105 ${
+                  location.pathname === "/login"
+                    ? "bg-accent-500 text-white"
+                    : isSolid
+                    ? "text-gray-700 border border-gray-300 hover:border-accent-500 hover:text-accent-600 bg-white"
+                    : "text-white border border-white/40 hover:border-white hover:bg-white/10"
                 }`}
               >
-                {authMode === "login" ? "Login" : "Sign Up"}
+                Login
               </button>
 
               <button
-                onClick={() =>
-                  authMode === "login"
-                    ? navigate("/login")
-                    : navigate("/signup")
-                }
+                onClick={handleDemoClick}
                 className="px-6 py-2.5 bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
-                {authMode === "login" ? "Continue to Login" : "Create Account"}
+                Book Demo
               </button>
             </div>
           </div>
@@ -112,7 +147,7 @@ function Navbar() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 rounded-lg transition-colors ${
-                isScrolled
+                isSolid
                   ? "text-gray-700 hover:bg-gray-100"
                   : "text-white hover:bg-white hover:bg-opacity-10"
               }`}
@@ -164,25 +199,17 @@ function Navbar() {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() =>
-                    setAuthMode((m) => (m === "login" ? "signup" : "login"))
-                  }
-                  className="flex-1 px-4 py-2 rounded-full border text-sm font-medium text-gray-700 bg-white"
+                  onClick={handleLoginClick}
+                  className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 font-semibold text-gray-700 bg-white hover:border-accent-500 transition text-center"
                 >
-                  {authMode === "login" ? "Login" : "Sign Up"}
+                  Login
                 </button>
 
                 <button
-                  onClick={() =>
-                    authMode === "login"
-                      ? navigate("/login")
-                      : navigate("/signup")
-                  }
-                  className="flex-1 px-4 py-2 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg shadow-lg text-center"
+                  onClick={handleDemoClick}
+                  className="flex-1 px-4 py-2.5 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg shadow-lg text-center"
                 >
-                  {authMode === "login"
-                    ? "Continue to Login"
-                    : "Create Account"}
+                  Book Demo
                 </button>
               </div>
             </div>

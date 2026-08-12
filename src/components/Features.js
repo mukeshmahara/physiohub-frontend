@@ -73,7 +73,7 @@ function Features() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+    <section id="features-section" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeInUp">

@@ -54,7 +54,7 @@ function Contact() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-gray-900 via-primary-900 to-gray-900 text-white relative overflow-hidden">
+    <section id="contact-section" className="py-20 px-4 bg-gradient-to-br from-gray-900 via-primary-900 to-gray-900 text-white relative overflow-hidden">
       {/* Background Decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-500 rounded-full opacity-5 blur-3xl"></div>
