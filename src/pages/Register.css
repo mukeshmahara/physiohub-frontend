@@ -1,0 +1,1155 @@
+* {
+  box-sizing: border-box;
+}
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  background: #ffffff;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #12213d;
+}
+
+/* =========================================================
+   LEFT HERO
+========================================================= */
+
+.register-hero {
+  width: 43%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 68% 23%,
+      rgba(255, 255, 255, 0.45) 0,
+      rgba(255, 255, 255, 0) 130px
+    ),
+    linear-gradient(145deg, #eefcff 0%, #e5f8fb 45%, #d9f3f7 100%);
+}
+
+.register-hero::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  bottom: -180px;
+  left: -170px;
+}
+
+.register-hero::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  top: 150px;
+  right: -150px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  min-height: 100vh;
+  padding: 54px 48px 45px;
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.physio-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+  color: #13213d;
+}
+
+.logo-mark {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #0d9fa4;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-person {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  left: 26px;
+  top: 10px;
+}
+
+.logo-person::before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border: 4px solid white;
+  border-top-color: transparent;
+  border-radius: 50%;
+  left: -8px;
+  top: 9px;
+  transform: rotate(-35deg);
+}
+
+.logo-spine {
+  position: absolute;
+  left: 28px;
+  top: 23px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logo-spine span {
+  display: block;
+  width: 6px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+}
+
+.logo-text > div {
+  font-size: 31px;
+  font-weight: 700;
+  letter-spacing: -1.4px;
+}
+
+.logo-text > div span {
+  color: #0d9fa4;
+}
+
+.logo-text small {
+  display: block;
+  margin-top: 1px;
+  font-size: 14px;
+  color: #52657d;
+  letter-spacing: 0.1px;
+}
+
+/* =========================================================
+   HERO COPY
+========================================================= */
+
+.hero-copy {
+  margin-top: 105px;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+  font-weight: 700;
+  color: #13213d;
+}
+
+.hero-copy h1 span {
+  color: #0d9fa4;
+}
+
+.hero-copy p {
+  margin-top: 22px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #243854;
+}
+
+/* =========================================================
+   PHYSIO ILLUSTRATION
+========================================================= */
+
+.physio-illustration {
+  width: 100%;
+  height: 340px;
+  position: relative;
+  margin-top: 25px;
+}
+
+/* window */
+
+.illustration-window {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  left: 21%;
+  top: 20px;
+  border: 7px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.window-line {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: rgba(166, 212, 216, 0.7);
+  left: 50%;
+}
+
+.window-line.short {
+  width: 100%;
+  height: 2px;
+  left: 0;
+  top: 50%;
+}
+
+/* poster */
+
+.body-poster {
+  position: absolute;
+  width: 55px;
+  height: 85px;
+  right: 18%;
+  top: 55px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid rgba(255, 255, 255, 0.8);
+}
+
+.body-head {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #badfe1;
+  left: 20px;
+  top: 11px;
+}
+
+.body-neck {
+  position: absolute;
+  width: 5px;
+  height: 9px;
+  background: #badfe1;
+  left: 22px;
+  top: 19px;
+}
+
+.body-shape {
+  position: absolute;
+  width: 20px;
+  height: 28px;
+  border-radius: 50%;
+  background: #badfe1;
+  left: 15px;
+  top: 25px;
+}
+
+.body-leg {
+  position: absolute;
+  width: 5px;
+  height: 26px;
+  background: #badfe1;
+  top: 50px;
+}
+
+.body-leg.left {
+  left: 19px;
+  transform: rotate(8deg);
+}
+
+.body-leg.right {
+  left: 28px;
+  transform: rotate(-8deg);
+}
+
+/* plant */
+
+.plant {
+  position: absolute;
+  left: 4%;
+  bottom: 58px;
+  width: 65px;
+  height: 100px;
+}
+
+.plant-pot {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  width: 32px;
+  height: 30px;
+  background: #a6d9dc;
+  border-radius: 3px 3px 10px 10px;
+}
+
+.plant-stem {
+  position: absolute;
+  width: 4px;
+  height: 65px;
+  background: #79bfc2;
+  left: 31px;
+  bottom: 25px;
+}
+
+.leaf {
+  position: absolute;
+  width: 24px;
+  height: 12px;
+  border-radius: 100% 0;
+  background: #83c8c9;
+}
+
+.leaf-1 {
+  left: 6px;
+  bottom: 62px;
+  transform: rotate(-20deg);
+}
+
+.leaf-2 {
+  right: 3px;
+  bottom: 72px;
+  transform: rotate(25deg);
+}
+
+.leaf-3 {
+  left: 3px;
+  bottom: 42px;
+  transform: rotate(-30deg);
+}
+
+.leaf-4 {
+  right: 1px;
+  bottom: 48px;
+  transform: rotate(35deg);
+}
+
+/* table */
+
+.treatment-table {
+  position: absolute;
+  width: 310px;
+  height: 150px;
+  left: 24%;
+  bottom: 38px;
+}
+
+.table-top {
+  position: absolute;
+  width: 100%;
+  height: 23px;
+  background: #5b7d94;
+  border-radius: 4px;
+  top: 48px;
+}
+
+.table-leg {
+  position: absolute;
+  width: 5px;
+  height: 105px;
+  background: #7e9bab;
+  top: 65px;
+}
+
+.table-leg.left {
+  left: 55px;
+  transform: rotate(15deg);
+}
+
+.table-leg.right {
+  right: 55px;
+  transform: rotate(-15deg);
+}
+
+/* therapist */
+
+.therapist {
+  position: absolute;
+  width: 100px;
+  height: 230px;
+  left: 18%;
+  bottom: 70px;
+}
+
+.therapist-head {
+  position: absolute;
+  width: 42px;
+  height: 46px;
+  border-radius: 50%;
+  background: #d8956f;
+  left: 28px;
+  top: 6px;
+}
+
+.therapist-hair {
+  position: absolute;
+  width: 47px;
+  height: 48px;
+  border-radius: 50% 50% 45% 35%;
+  background: #1c4d58;
+  left: 24px;
+  top: 0;
+}
+
+.therapist-body {
+  position: absolute;
+  width: 67px;
+  height: 90px;
+  border-radius: 28px 28px 15px 15px;
+  background: #12a7a5;
+  left: 16px;
+  top: 45px;
+}
+
+.therapist-arm {
+  position: absolute;
+  width: 18px;
+  height: 78px;
+  background: #d8956f;
+  border-radius: 15px;
+  top: 52px;
+}
+
+.therapist-arm.left {
+  left: 5px;
+  transform: rotate(22deg);
+}
+
+.therapist-arm.right {
+  right: 4px;
+  transform: rotate(-28deg);
+}
+
+.therapist-leg {
+  position: absolute;
+  width: 23px;
+  height: 90px;
+  background: #173f59;
+  top: 128px;
+  border-radius: 8px;
+}
+
+.therapist-leg.left {
+  left: 20px;
+  transform: rotate(8deg);
+}
+
+.therapist-leg.right {
+  left: 54px;
+  transform: rotate(-7deg);
+}
+
+/* patient */
+
+.patient {
+  position: absolute;
+  width: 220px;
+  height: 100px;
+  left: 39%;
+  bottom: 104px;
+}
+
+.patient-head {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background: #c88462;
+  border-radius: 50%;
+  left: 20px;
+  top: 1px;
+}
+
+.patient-hair {
+  position: absolute;
+  width: 37px;
+  height: 26px;
+  border-radius: 50% 50% 30% 30%;
+  background: #203d4b;
+  left: 18px;
+  top: -3px;
+}
+
+.patient-body {
+  position: absolute;
+  width: 85px;
+  height: 50px;
+  background: #263f61;
+  border-radius: 30px 15px 15px 20px;
+  left: 45px;
+  top: 30px;
+  transform: rotate(10deg);
+}
+
+.patient-arm {
+  position: absolute;
+  width: 70px;
+  height: 13px;
+  background: #c88462;
+  border-radius: 10px;
+  left: 100px;
+  top: 42px;
+  transform: rotate(15deg);
+}
+
+.patient-leg.upper {
+  position: absolute;
+  width: 85px;
+  height: 18px;
+  border-radius: 12px;
+  background: #2a4161;
+  left: 100px;
+  top: 38px;
+  transform: rotate(-18deg);
+}
+
+.patient-leg.lower {
+  position: absolute;
+  width: 78px;
+  height: 16px;
+  border-radius: 12px;
+  background: #c88462;
+  left: 150px;
+  top: 17px;
+  transform: rotate(-2deg);
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.hero-features {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 38px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  text-align: center;
+  color: #10233d;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.feature-icon {
+  width: 31px;
+  height: 31px;
+  color: #0d9fa4;
+}
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.register-form-section {
+  width: 57%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 50px 70px;
+  background: #ffffff;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 580px;
+
+  padding: 37px 39px 35px;
+
+  background: #ffffff;
+  border: 1px solid #e5e9ee;
+  border-radius: 17px;
+
+  box-shadow:
+    0 14px 40px rgba(22, 40, 65, 0.08),
+    0 3px 10px rgba(22, 40, 65, 0.03);
+}
+
+/* =========================================================
+   FORM HEADER
+========================================================= */
+
+.form-header h2 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.25;
+  color: #111d35;
+  letter-spacing: -0.6px;
+}
+
+.form-header p {
+  margin: 14px 0 0;
+  font-size: 16px;
+  color: #596a81;
+}
+
+.form-divider {
+  height: 1px;
+  background: #e2e6eb;
+  margin: 25px 0 25px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+  margin-bottom: 19px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+
+  font-size: 16px;
+  font-weight: 600;
+  color: #14213a;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+
+  left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: #64748b;
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 52px;
+
+  border: 1px solid #ccd5df;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  padding: 0 47px;
+
+  color: #17243b;
+  font-size: 16px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-wrapper input::placeholder {
+  color: #718096;
+}
+
+.input-wrapper input:focus {
+  border-color: #0d9fa4;
+  box-shadow: 0 0 0 3px rgba(13, 159, 164, 0.1);
+}
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 28px;
+  height: 28px;
+
+  border: 0;
+  background: transparent;
+
+  color: #52647b;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+}
+
+.eye-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.password-hint {
+  display: block;
+  margin-top: 6px;
+
+  color: #68798e;
+  font-size: 13px;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.register-error {
+  margin: -4px 0 16px;
+
+  padding: 11px 13px;
+
+  border-radius: 7px;
+
+  background: #fff1f1;
+  border: 1px solid #f3c4c4;
+
+  color: #c0392b;
+  font-size: 14px;
+}
+
+/* =========================================================
+   TERMS
+========================================================= */
+
+.terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  cursor: pointer;
+
+  margin: 3px 0 20px;
+
+  color: #17243b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.terms input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.custom-checkbox {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+
+  border: 1.5px solid #aeb8c4;
+  border-radius: 4px;
+
+  position: relative;
+  background: #ffffff;
+}
+
+.terms input:checked + .custom-checkbox {
+  background: #0d9fa4;
+  border-color: #0d9fa4;
+}
+
+.terms input:checked + .custom-checkbox::after {
+  content: "";
+
+  position: absolute;
+
+  width: 6px;
+  height: 11px;
+
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+
+  transform: rotate(45deg);
+
+  left: 7px;
+  top: 3px;
+}
+
+.terms a {
+  color: #07969c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   CREATE ACCOUNT
+========================================================= */
+
+.create-account-btn {
+  width: 100%;
+  height: 58px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: #0b9ca2;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
+}
+
+.create-account-btn:hover:not(:disabled) {
+  background: #078b90;
+}
+
+.create-account-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.create-account-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button-user-icon {
+  width: 23px;
+  height: 23px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: white;
+
+  border-radius: 50%;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   OR
+========================================================= */
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  margin: 23px 0;
+}
+
+.or-divider span {
+  height: 1px;
+  flex: 1;
+  background: #e1e5e9;
+}
+
+.or-divider strong {
+  color: #63748a;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* =========================================================
+   GOOGLE
+========================================================= */
+
+.google-btn {
+  width: 100%;
+  height: 52px;
+
+  border: 1px solid #cfd7df;
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #1c2a40;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.google-btn:hover {
+  background: #fafcfd;
+  border-color: #aeb9c5;
+}
+
+.google-icon {
+  font-family: Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+
+  background: linear-gradient(
+    90deg,
+    #4285f4 0 25%,
+    #34a853 25% 50%,
+    #fbbc05 50% 75%,
+    #ea4335 75%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-link {
+  text-align: center;
+
+  margin-top: 28px;
+
+  color: #28384f;
+  font-size: 15px;
+}
+
+.login-link a {
+  margin-left: 9px;
+
+  color: #07969c;
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.register-footer {
+  position: fixed;
+
+  left: 43%;
+  right: 0;
+  bottom: 13px;
+
+  text-align: center;
+
+  color: #68788d;
+  font-size: 13px;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .register-hero {
+    width: 40%;
+  }
+
+  .register-form-section {
+    width: 60%;
+    padding: 40px;
+  }
+
+  .hero-content {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  .hero-copy {
+    margin-top: 80px;
+  }
+
+  .hero-copy h1 {
+    font-size: 29px;
+  }
+
+  .hero-copy p br {
+    display: none;
+  }
+
+  .register-footer {
+    left: 40%;
+  }
+}
+
+@media (max-width: 850px) {
+  .register-page {
+    display: block;
+  }
+
+  .register-hero {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .hero-content {
+    min-height: auto;
+    padding: 35px 30px 40px;
+  }
+
+  .hero-copy {
+    margin-top: 60px;
+  }
+
+  .hero-copy h1 {
+    font-size: 32px;
+  }
+
+  .physio-illustration {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-features {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    margin-top: 20px;
+  }
+
+  .register-form-section {
+    width: 100%;
+    min-height: auto;
+
+    padding: 40px 25px 80px;
+  }
+
+  .register-card {
+    max-width: 600px;
+  }
+
+  .register-footer {
+    position: static;
+
+    padding: 20px;
+
+    background: #ffffff;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-content {
+    padding: 28px 20px 30px;
+  }
+
+  .logo-mark {
+    width: 52px;
+    height: 52px;
+  }
+
+  .logo-text > div {
+    font-size: 26px;
+  }
+
+  .logo-text small {
+    font-size: 12px;
+  }
+
+  .hero-copy {
+    margin-top: 45px;
+  }
+
+  .hero-copy h1 {
+    font-size: 27px;
+  }
+
+  .hero-copy p {
+    font-size: 15px;
+  }
+
+  .physio-illustration {
+    transform: scale(0.82);
+    transform-origin: center;
+    margin-top: 0;
+    margin-bottom: -45px;
+  }
+
+  .hero-features {
+    gap: 10px;
+  }
+
+  .hero-feature {
+    font-size: 12px;
+  }
+
+  .feature-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .register-form-section {
+    padding: 25px 15px 60px;
+  }
+
+  .register-card {
+    padding: 28px 20px;
+    border-radius: 13px;
+  }
+
+  .form-header h2 {
+    font-size: 26px;
+  }
+
+  .form-header p {
+    font-size: 14px;
+  }
+
+  .input-wrapper input {
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .create-account-btn {
+    height: 54px;
+  }
+}
