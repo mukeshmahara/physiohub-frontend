@@ -22,15 +22,15 @@ export function useLoginMutation() {
   return useMutation({
     mutationFn: async ({ usernameOrEmail, password, rememberMe = true }) => {
       const response = await api.post(
-        "/auth/login",
-        { usernameOrEmail, password },
-        { requiresAuth: false }
+        "/auth/users/login",
+        { user: { email: usernameOrEmail, password: password } },
+        { requiresAuth: false },
       );
       return { data: response.data, rememberMe };
     },
     onSuccess: ({ data, rememberMe }) => {
-      if (data?.token) {
-        setAuth(data.user || { email: data.email }, data.token, rememberMe);
+      if (data?.access_token) {
+        setAuth(data.user, data.access_token, rememberMe);
       }
       showToast("Successfully signed in!", "success");
     },
@@ -54,7 +54,10 @@ export function useDemoMutation() {
       return response.data;
     },
     onSuccess: () => {
-      showToast("Demo request submitted! We will contact you shortly.", "success");
+      showToast(
+        "Demo request submitted! We will contact you shortly.",
+        "success",
+      );
     },
     onError: (error) => {
       showToast(error.message || "Failed to submit demo request", "error");

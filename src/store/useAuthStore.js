@@ -10,6 +10,7 @@ export const useAuthStore = create(
     (set, get) => ({
       user: null,
       token: localStorage.getItem("authToken") || null,
+      refresh_token: localStorage.getItem("refreshToken") || null,
       isAuthenticated: !!localStorage.getItem("authToken"),
 
       /**
@@ -53,8 +54,8 @@ export const useAuthStore = create(
         token: state.token,
         isAuthenticated: state.isAuthenticated,
       }),
-    }
-  )
+    },
+  ),
 );
 
 export default useAuthStore;

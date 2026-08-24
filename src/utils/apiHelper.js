@@ -6,7 +6,7 @@
 
 // Default Configuration
 const DEFAULT_CONFIG = {
-  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api",
+  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1",
   timeout: 30000, // 30 seconds
   headers: {
     "Content-Type": "application/json",
@@ -212,7 +212,7 @@ class ApiClient {
         throw new ApiError(
           errorMessage,
           interceptedResponse.status,
-          responseData
+          responseData,
         );
       }
 
@@ -234,12 +234,9 @@ class ApiClient {
         });
       }
 
-      throw new ApiError(
-        error.message || "Network connection error",
-        0,
-        null,
-        { isNetworkError: true }
-      );
+      throw new ApiError(error.message || "Network connection error", 0, null, {
+        isNetworkError: true,
+      });
     }
   }
 
