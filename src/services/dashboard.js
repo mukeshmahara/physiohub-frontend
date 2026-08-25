@@ -1,5 +1,5 @@
-import api from "../utils/apiHelper";
+import { api } from "../utils/apiHelper";
 
 export const getDashboard = () => {
-  return api("/dashboard");
+  return api.get("/dashboard");
 };

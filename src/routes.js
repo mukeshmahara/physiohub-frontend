@@ -5,6 +5,10 @@ import DemoForm from "./components/DemoForm";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Appointment from "./pages/Appointment";
+import Patient from "./pages/Patient";
+import Doctor from "./pages/Doctor";
+import Setting from "./pages/Setting";
 
 // Export route definitions as component references so the router can render them
 export const publicRoutes = [
@@ -17,7 +21,13 @@ export const publicRoutes = [
 ];
 
 // Private routes (render behind a ProtectedRoute wrapper)
-export const privateRoutes = [{ path: "/dashboard", component: Dashboard }];
+export const privateRoutes = [
+  { path: "/dashboard", component: Dashboard },
+  { path: "/patients", component: Patient },
+  { path: "/appointments", component: Appointment },
+  { path: "/doctors", component: Doctor },
+  { path: "/settings", component: Setting },
+];
 
 const routesConfig = { publicRoutes, privateRoutes };
 export default routesConfig;

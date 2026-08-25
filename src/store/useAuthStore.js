@@ -16,11 +16,12 @@ export const useAuthStore = create(
       /**
        * Set Login Session
        */
-      setAuth: (user, token, remember = true) => {
+      setAuth: (user, token, refresh_token, remember = true) => {
         api.setAuthToken(token, remember);
         set({
           user,
           token,
+          refresh_token,
           isAuthenticated: true,
         });
       },
