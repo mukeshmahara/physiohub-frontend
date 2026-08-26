@@ -5,9 +5,9 @@ import DemoForm from "./components/DemoForm";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Appointment from "./pages/Appointment";
-import Patient from "./pages/Patient";
-import Doctor from "./pages/Doctor";
+import Appointment from "./pages/Appointments";
+import Patient from "./pages/Patients";
+import Doctor from "./pages/Doctors";
 import Setting from "./pages/Setting";
 
 // Export route definitions as component references so the router can render them
