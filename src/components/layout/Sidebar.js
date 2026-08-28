@@ -23,6 +23,7 @@ import {
   X,
   Activity,
 } from "lucide-react";
+import useAuthStore from "../../store/useAuthStore";
 
 const navigation = [
   {
@@ -266,7 +267,7 @@ export default function Sidebar({ mobileOpen = false, onMobileClose }) {
     sessionStorage.removeItem("authToken");
 
     // If you have Zustand auth state:
-    // useAuthStore.getState().logout();
+    useAuthStore.getState().logout();
 
     navigate("/login");
   };
