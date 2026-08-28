@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "../routes";
 import ProtectedRoute from "./ProtectedRoute";
+import AppLayout from "../components/layout/AppLayout";
 import DashboardLayout from "./layout/DashboardLayout";
 
 const AppRoutes = () => {
@@ -13,16 +14,16 @@ const AppRoutes = () => {
       ))}
 
       {/* Private Routes */}
-      <Route
-        element={
-          <ProtectedRoute>
-            <DashboardLayout />
-          </ProtectedRoute>
-        }
-      >
-        {privateRoutes.map(({ path, component: Component }) => (
-          <Route key={`${path}-private`} path={path} element={<Component />} />
-        ))}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AppLayout />}>
+          {privateRoutes.map(({ path, component: Component }) => (
+            <Route
+              key={`${path}-private`}
+              path={path}
+              element={<Component />}
+            />
+          ))}
+        </Route>
       </Route>
     </Routes>
   );
