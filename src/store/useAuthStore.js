@@ -9,10 +9,11 @@ export const useAuthStore = create(
   persist(
     (set, get) => ({
       user: null,
+      roles: [],
+      activeRole: null,
       token: localStorage.getItem("authToken") || null,
       refresh_token: localStorage.getItem("refreshToken") || null,
       isAuthenticated: !!localStorage.getItem("authToken"),
-
       /**
        * Set Login Session
        */
@@ -34,7 +35,17 @@ export const useAuthStore = create(
           user: state.user ? { ...state.user, ...partialUser } : partialUser,
         }));
       },
+      setActiveRole: (role) => {
+        set((state) => {
+          if (!state.roles.includes(role)) {
+            return state;
+          }
 
+          return {
+            activeRole: role,
+          };
+        });
+      },
       /**
        * Logout
        */
@@ -43,6 +54,8 @@ export const useAuthStore = create(
         set({
           user: null,
           token: null,
+          roles: [],
+          activeRole: null,
           isAuthenticated: false,
         });
       },

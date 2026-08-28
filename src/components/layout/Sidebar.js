@@ -262,6 +262,7 @@ export default function Sidebar({ mobileOpen = false, onMobileClose }) {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
 
+  const activeRole = useAuthStore((state) => state.activeRole);
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     sessionStorage.removeItem("authToken");
