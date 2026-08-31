@@ -3,12 +3,14 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Bell, ChevronRight, Menu, Search, UserCircle } from "lucide-react";
 
 import Sidebar from "./Sidebar";
+import useAuthStore from "../../store/useAuthStore";
 
 const DashboardLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
 
   // Convert pathname into readable page name
   const getPageName = () => {
@@ -122,10 +124,10 @@ const DashboardLayout = () => {
 
                 <div className="hidden text-left md:block">
                   <p className="max-w-[120px] truncate text-sm font-semibold text-slate-800">
-                    Dr. John Doe
+                    {user.name || user.email}
                   </p>
 
-                  <p className="text-xs text-slate-400">Administrator</p>
+                  <p className="text-xs text-slate-400">{user.activeRole}</p>
                 </div>
               </button>
             </div>

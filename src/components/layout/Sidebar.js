@@ -261,7 +261,7 @@ function SidebarItem({ item, collapsed, isMobile, onNavigate }) {
 export default function Sidebar({ mobileOpen = false, onMobileClose }) {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-
+  const user = useAuthStore((state) => state.user);
   const activeRole = useAuthStore((state) => state.activeRole);
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -393,11 +393,11 @@ export default function Sidebar({ mobileOpen = false, onMobileClose }) {
 
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-slate-800">
-                    Dr. John Doe
+                    {user?.name || user.email}
                   </p>
 
                   <p className="truncate text-xs text-slate-400">
-                    Administrator
+                    {user.activeRole || "N/A"}
                   </p>
                 </div>
 
