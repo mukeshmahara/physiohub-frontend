@@ -17,6 +17,7 @@ export const QUERY_KEYS = {
  */
 export function useLoginMutation() {
   const setAuth = useAuthStore((state) => state.setAuth);
+  const setActiveRole = useAuthStore((state) => state.setActiveRole);
   const showToast = useUIStore((state) => state.showToast);
 
   return useMutation({
@@ -31,6 +32,7 @@ export function useLoginMutation() {
     onSuccess: ({ data, rememberMe }) => {
       if (data?.access_token) {
         setAuth(data.user, data.access_token, rememberMe);
+        setActiveRole(data.user.roles); // Set the first role as active role
       }
       showToast("Successfully signed in!", "success");
     },
