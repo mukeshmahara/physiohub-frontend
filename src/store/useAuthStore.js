@@ -12,17 +12,15 @@ export const useAuthStore = create(
       roles: [],
       activeRole: null,
       token: localStorage.getItem("authToken") || null,
-      refresh_token: localStorage.getItem("refreshToken") || null,
       isAuthenticated: !!localStorage.getItem("authToken"),
       /**
        * Set Login Session
        */
-      setAuth: (user, token, refresh_token, remember = true) => {
+      setAuth: (user, token, remember = true) => {
         api.setAuthToken(token, remember);
         set({
           user,
           token,
-          refresh_token,
           isAuthenticated: true,
         });
       },
