@@ -6,13 +6,10 @@ import {
   CalendarDays,
   Stethoscope,
   ClipboardList,
-  Dumbbell,
   CreditCard,
   Package,
   UserRoundCog,
   BarChart3,
-  Bell,
-  MessageSquare,
   Settings,
   HelpCircle,
   LogOut,
@@ -68,14 +65,6 @@ const navigation = [
         children: [
           { label: "Assessments", path: "/assessments" },
           { label: "New Assessment", path: "/assessments/new" },
-        ],
-      },
-      {
-        label: "Exercise Programs",
-        icon: Dumbbell,
-        children: [
-          { label: "Programs", path: "/exercises" },
-          { label: "Exercise Library", path: "/exercises/library" },
         ],
       },
     ],
