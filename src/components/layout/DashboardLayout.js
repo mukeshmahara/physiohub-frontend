@@ -32,6 +32,8 @@ const DashboardLayout = () => {
       "/treatments/plans": "Treatments",
       "/treatments/history": "Treatments",
       "/assessments": "Assessments",
+      "/assessments/new": "Assessments",
+      "/assessments/history": "Assessments",
       "/billing": "Billing & Payments",
       "/inventory": "Inventory",
       "/therapists": "Therapists",

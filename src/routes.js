@@ -51,6 +51,8 @@ export const privateRoutes = [
   { path: "/messages", component: Message },
   { path: "/reports", component: Report },
   { path: "/assessments", component: Assessment },
+  { path: "/assessments/new", component: Assessment },
+  { path: "/assessments/history", component: Assessment },
   { path: "/billings", component: Billing },
 ];
 

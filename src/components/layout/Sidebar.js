@@ -192,7 +192,7 @@ function SidebarItem({ item, collapsed, isMobile, onNavigate }) {
               <NavLink
                 key={child.path}
                 to={child.path}
-                end={child.path === "/patients" || child.path === "/treatments"}
+                end={child.path === "/patients" || child.path === "/treatments" || child.path === "/assessments"}
                 onClick={onNavigate}
                 className={({ isActive }) =>
                   [
