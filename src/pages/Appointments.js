@@ -1,11 +1,1 @@
-import React from "react";
-
-const Appointments = () => {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">Appointments</h1>
-    </div>
-  );
-};
-
-export default Appointments;
+export { Appointments as default } from "./appointments";
