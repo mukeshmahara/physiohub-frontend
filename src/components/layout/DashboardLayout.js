@@ -1,16 +1,36 @@
 import React, { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Bell, ChevronRight, Menu, MessageSquare, Search, UserCircle } from "lucide-react";
+import {
+  Bell,
+  ChevronRight,
+  Menu,
+  MessageSquare,
+  Moon,
+  Search,
+  Sun,
+  UserCircle,
+} from "lucide-react";
 
 import Sidebar from "./Sidebar";
 import useAuthStore from "../../store/useAuthStore";
 
 const DashboardLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(
+    () => localStorage.getItem("physiohub-sidebar-collapsed") === "true",
+  );
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("physiohub-theme") === "dark",
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
+
+  React.useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("physiohub-theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   // Convert pathname into readable page name
   const getPageName = () => {
@@ -50,19 +70,25 @@ const DashboardLayout = () => {
   const pageName = getPageName();
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 text-slate-800 transition-colors duration-300">
       {/* =========================================
           SIDEBAR
       ========================================= */}
       <Sidebar
         mobileOpen={mobileOpen}
         onMobileClose={() => setMobileOpen(false)}
+        onCollapsedChange={setSidebarCollapsed}
       />
 
       {/* =========================================
           MAIN AREA
       ========================================= */}
-      <div className="min-h-screen lg:pl-[260px]">
+      <div
+        className={[
+          "min-h-screen transition-[padding] duration-300",
+          sidebarCollapsed ? "lg:pl-[72px]" : "lg:pl-[260px]",
+        ].join(" ")}
+      >
         {/* =========================================
             TOP HEADER
         ========================================= */}
@@ -129,6 +155,17 @@ const DashboardLayout = () => {
                 aria-label="Messages"
               >
                 <MessageSquare size={20} />
+              </button>
+
+              {/* Theme */}
+              <button
+                type="button"
+                onClick={() => setDarkMode((previous) => !previous)}
+                className="rounded-xl p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
 
               {/* Divider */}
