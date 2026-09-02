@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Bell, ChevronRight, Menu, Search, UserCircle } from "lucide-react";
+import { Bell, ChevronRight, Menu, MessageSquare, Search, UserCircle } from "lucide-react";
 
 import Sidebar from "./Sidebar";
 import useAuthStore from "../../store/useAuthStore";
@@ -117,6 +117,16 @@ const DashboardLayout = () => {
 
                 {/* Notification badge */}
                 <span className="absolute right-1.5 top-1.5 flex h-2 w-2 rounded-full bg-teal-500 ring-2 ring-white" />
+              </button>
+
+              {/* Messages */}
+              <button
+                type="button"
+                onClick={() => navigate("/messages")}
+                className="relative rounded-xl p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
+                aria-label="Messages"
+              >
+                <MessageSquare size={20} />
               </button>
 
               {/* Divider */}

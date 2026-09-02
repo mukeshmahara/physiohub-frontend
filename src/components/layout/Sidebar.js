@@ -112,22 +112,6 @@ const navigation = [
     ],
   },
 
-  {
-    section: "COMMUNICATION",
-    items: [
-      {
-        label: "Notifications",
-        icon: Bell,
-        path: "/notifications",
-        badge: 4,
-      },
-      {
-        label: "Messages",
-        icon: MessageSquare,
-        path: "/messages",
-      },
-    ],
-  },
 ];
 
 const bottomNavigation = [
