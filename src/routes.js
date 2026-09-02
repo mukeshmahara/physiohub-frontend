@@ -16,6 +16,7 @@ import Treatment from "./pages/Treatment";
 import Assessment from "./pages/Assessment";
 import Billing from "./pages/Billing";
 import Report from "./pages/Report";
+import Help from "./pages/Help";
 
 // Export route definitions as component references so the router can render them
 export const publicRoutes = [
@@ -54,6 +55,7 @@ export const privateRoutes = [
   { path: "/assessments/new", component: Assessment },
   { path: "/assessments/history", component: Assessment },
   { path: "/billings", component: Billing },
+  { path: "/help", component: Help },
 ];
 
 const routesConfig = { publicRoutes, privateRoutes };
