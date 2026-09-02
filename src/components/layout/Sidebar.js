@@ -47,8 +47,8 @@ const navigation = [
         label: "Appointments",
         icon: CalendarDays,
         children: [
-          { label: "Calendar", path: "/appointments" },
-          { label: "Today's Appointments", path: "/appointments/today" },
+          { label: "Calendar", path: "/appointments/calendar" },
+          { label: "Today's Appointments", path: "/appointments/todays" },
           { label: "Upcoming", path: "/appointments/upcoming" },
           { label: "Waiting List", path: "/appointments/waiting" },
         ],
@@ -208,6 +208,7 @@ function SidebarItem({ item, collapsed, isMobile, onNavigate }) {
               <NavLink
                 key={child.path}
                 to={child.path}
+                end={child.path === "/patients" || child.path === "/treatments"}
                 onClick={onNavigate}
                 className={({ isActive }) =>
                   [
