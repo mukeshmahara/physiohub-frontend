@@ -99,7 +99,6 @@ const navigation = [
       },
     ],
   },
-
 ];
 
 const bottomNavigation = [
@@ -117,6 +116,7 @@ const bottomNavigation = [
 
 function SidebarItem({ item, collapsed, isMobile, onNavigate }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const Icon = item.icon;
@@ -134,6 +134,11 @@ function SidebarItem({ item, collapsed, isMobile, onNavigate }) {
 
   const handleParentClick = () => {
     if (hasChildren) {
+      if (collapsed) {
+        navigate(item.children[0].path);
+        onNavigate?.();
+        return;
+      }
       setOpen((previous) => !previous);
     } else {
       onNavigate?.();
@@ -180,7 +185,11 @@ function SidebarItem({ item, collapsed, isMobile, onNavigate }) {
               <NavLink
                 key={child.path}
                 to={child.path}
-                end={child.path === "/patients" || child.path === "/treatments" || child.path === "/assessments"}
+                end={
+                  child.path === "/patients" ||
+                  child.path === "/treatments" ||
+                  child.path === "/assessments"
+                }
                 onClick={onNavigate}
                 className={({ isActive }) =>
                   [
@@ -429,7 +438,6 @@ export default function Sidebar({
             </button>
           )}
         </div>
-
       </aside>
     </>
   );
