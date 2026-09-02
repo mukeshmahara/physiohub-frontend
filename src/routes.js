@@ -17,6 +17,7 @@ import Assessment from "./pages/Assessment";
 import Billing from "./pages/Billing";
 import Report from "./pages/Report";
 import Help from "./pages/Help";
+import ForgotPassword from "./pages/ForgotPassword";
 
 // Export route definitions as component references so the router can render them
 export const publicRoutes = [
@@ -26,6 +27,8 @@ export const publicRoutes = [
   { path: "/demo", component: DemoForm },
   { path: "/login", component: Login },
   { path: "/signup", component: Register }, // Assuming signup is handled by the same component as login
+  { path: "/forgot-password", component: ForgotPassword },
+  { path: "/reset-password", component: ForgotPassword },
 ];
 
 // Private routes (render behind a ProtectedRoute wrapper)
