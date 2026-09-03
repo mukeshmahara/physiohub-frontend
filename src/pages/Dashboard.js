@@ -188,7 +188,7 @@ const StatCard = ({ title, value, icon }) => {
 const Appointment = ({ appointment }) => {
   const scheduledAt = new Date(appointment.scheduled_at);
   return (
-    <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
+    <tr className="border-b border-gray-100 last:border-0 transition-colors hover:bg-slate-50">
       <td className="px-6 py-4">
         <p className="font-medium text-gray-900">
           {appointment.patient_name || `Patient #${appointment.patient_id}`}
