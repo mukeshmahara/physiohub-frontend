@@ -12,11 +12,12 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const clinicId = formData.get("clinicId");
     const usernameOrEmail = formData.get("usernameOrEmail");
     const password = formData.get("password");
 
     loginMutation.mutate(
-      { usernameOrEmail, password, rememberMe },
+      { clinicId, usernameOrEmail, password, rememberMe },
       {
         onSuccess: () => {
           navigate("/dashboard");
@@ -153,6 +154,25 @@ function Login() {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              {/* Clinic ID */}
+              <div>
+                <label
+                  htmlFor="clinicId"
+                  className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2"
+                >
+                  Clinic ID
+                </label>
+                <input
+                  id="clinicId"
+                  name="clinicId"
+                  type="text"
+                  required
+                  autoComplete="organization"
+                  placeholder="Enter your clinic ID"
+                  className="w-full px-4 py-3 sm:py-3.5 border border-gray-200 rounded-xl bg-gray-50/70 text-base sm:text-sm text-gray-900 font-medium placeholder-gray-400 hover:border-primary-400 hover:bg-white hover:shadow-sm focus:bg-white focus:outline-none focus:ring-4 focus:ring-primary-500/15 focus:border-primary-500 transition-all duration-200"
+                />
+              </div>
+
               {/* Username / Email */}
               <div>
                 <label

@@ -21,10 +21,21 @@ export function useLoginMutation() {
   const showToast = useUIStore((state) => state.showToast);
 
   return useMutation({
-    mutationFn: async ({ usernameOrEmail, password, rememberMe = true }) => {
+    mutationFn: async ({
+      clinicId,
+      usernameOrEmail,
+      password,
+      rememberMe = true,
+    }) => {
       const response = await api.post(
         "/auth/users/login",
-        { user: { email: usernameOrEmail, password: password } },
+        {
+          user: {
+            clinic_id: clinicId,
+            email: usernameOrEmail,
+            password,
+          },
+        },
         { requiresAuth: false },
       );
       return { data: response.data, rememberMe };
