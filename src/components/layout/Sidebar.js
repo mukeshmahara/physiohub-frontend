@@ -251,6 +251,11 @@ export default function Sidebar({
   });
   const user = useAuthStore((state) => state.user);
   const activeRole = useAuthStore((state) => state.activeRole);
+  const clinicName =
+    user?.clinic?.name ||
+    user?.clinic_name ||
+    user?.clinicName ||
+    "Clinic";
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     sessionStorage.removeItem("authToken");
@@ -354,11 +359,11 @@ export default function Sidebar({
 
         {/* Navigation */}
         <div className="flex-1 overflow-y-auto px-3 py-5">
-          {navigation.map((group) => (
+          {navigation.map((group, index) => (
             <div key={group.section} className="mb-6">
               {!collapsed && (
                 <div className="mb-2 px-3 text-[10px] font-bold tracking-[0.12em] text-slate-400">
-                  {group.section}
+                  {index === 0 ? clinicName : group.section}
                 </div>
               )}
 
