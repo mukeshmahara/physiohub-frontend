@@ -1,33 +1,21 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { Users, CalendarDays, Clock, Activity } from "lucide-react";
 
-import { getDashboard } from "../services/dashboard";
+import { useAppointmentsQuery } from "../services/appointmentQueries";
+import { usePatientsQuery } from "../services/patientQueries";
+import useAuthStore from "../store/useAuthStore";
 
 const Dashboard = () => {
-  const [dashboard, setDashboard] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const loadDashboard = async () => {
-      try {
-        setLoading(true);
-        setError("");
-
-        const response = await getDashboard();
-
-        // Your API helper returns:
-        // { data, status, headers }
-        setDashboard(response.data);
-      } catch (error) {
-        setError(error.message || "Failed to load dashboard");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadDashboard();
-  }, []);
+  const user = useAuthStore((state) => state.user);
+  const patientsQuery = usePatientsQuery();
+  const appointmentsQuery = useAppointmentsQuery();
+  const patients = useMemo(() => (Array.isArray(patientsQuery.data) ? patientsQuery.data : patientsQuery.data?.patients || patientsQuery.data?.data || []), [patientsQuery.data]);
+  const appointments = useMemo(() => (Array.isArray(appointmentsQuery.data) ? appointmentsQuery.data : appointmentsQuery.data?.appointments || appointmentsQuery.data?.data || []), [appointmentsQuery.data]);
+  const todayKey = formatLocalDate(new Date());
+  const todayAppointments = useMemo(() => appointments.filter((appointment) => formatLocalDate(new Date(appointment.scheduled_at)) === todayKey), [appointments, todayKey]);
+  const upcomingAppointments = useMemo(() => appointments.filter((appointment) => new Date(appointment.scheduled_at) > new Date()), [appointments]);
+  const loading = patientsQuery.isLoading || appointmentsQuery.isLoading;
+  const error = patientsQuery.error || appointmentsQuery.error;
 
   if (loading) {
     return (
@@ -74,7 +62,7 @@ const Dashboard = () => {
       <section>
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           Good morning
-          {dashboard?.user?.name ? `, ${dashboard.user.name}` : ""} 👋
+          {user?.name ? `, ${user.name}` : ""} 👋
         </h1>
 
         <p className="mt-1 text-sm text-gray-500 sm:text-base">
@@ -88,19 +76,19 @@ const Dashboard = () => {
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <StatCard
           title="Total Patients"
-          value={dashboard?.statistics?.patients ?? 0}
+          value={patients.length}
           icon={<Users size={22} />}
         />
 
         <StatCard
           title="Today's Appointments"
-          value={dashboard?.statistics?.today_appointments ?? 0}
+          value={todayAppointments.length}
           icon={<CalendarDays size={22} />}
         />
 
         <StatCard
           title="Upcoming Appointments"
-          value={dashboard?.statistics?.upcoming_appointments ?? 0}
+          value={upcomingAppointments.length}
           icon={<Clock size={22} />}
         />
       </section>
@@ -125,7 +113,7 @@ const Dashboard = () => {
         </div>
 
         {/* Appointments */}
-        {dashboard?.today_appointments?.length ? (
+        {todayAppointments.length ? (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[650px]">
               <thead>
@@ -141,7 +129,7 @@ const Dashboard = () => {
               </thead>
 
               <tbody>
-                {dashboard.today_appointments.map((appointment) => (
+                {todayAppointments.map((appointment) => (
                   <Appointment key={appointment.id} appointment={appointment} />
                 ))}
               </tbody>
@@ -159,6 +147,14 @@ const Dashboard = () => {
       </section>
     </div>
   );
+};
+
+const formatLocalDate = (date) => {
+  if (Number.isNaN(date.getTime())) return "";
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
 /* ============================================
@@ -190,16 +186,26 @@ const StatCard = ({ title, value, icon }) => {
 ============================================ */
 
 const Appointment = ({ appointment }) => {
+  const scheduledAt = new Date(appointment.scheduled_at);
   return (
     <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
       <td className="px-6 py-4">
-        <p className="font-medium text-gray-900">{appointment.patient_name}</p>
+        <p className="font-medium text-gray-900">
+          {appointment.patient_name || `Patient #${appointment.patient_id}`}
+        </p>
       </td>
 
-      <td className="px-6 py-4 text-sm text-gray-600">{appointment.time}</td>
+      <td className="px-6 py-4 text-sm text-gray-600">
+        {Number.isNaN(scheduledAt.getTime())
+          ? "-"
+          : scheduledAt.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+      </td>
 
       <td className="px-6 py-4 text-sm text-gray-600">
-        {appointment.therapist_name}
+        {appointment.therapist_name || `Doctor #${appointment.doctor_id}`}
       </td>
 
       <td className="px-6 py-4">
