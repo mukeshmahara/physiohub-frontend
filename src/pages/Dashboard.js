@@ -9,13 +9,41 @@ const Dashboard = () => {
   const user = useAuthStore((state) => state.user);
   const patientsQuery = usePatientsQuery();
   const appointmentsQuery = useAppointmentsQuery();
-  const patients = useMemo(() => (Array.isArray(patientsQuery.data) ? patientsQuery.data : patientsQuery.data?.patients || patientsQuery.data?.data || []), [patientsQuery.data]);
-  const appointments = useMemo(() => (Array.isArray(appointmentsQuery.data) ? appointmentsQuery.data : appointmentsQuery.data?.appointments || appointmentsQuery.data?.data || []), [appointmentsQuery.data]);
+  const patients = useMemo(
+    () =>
+      Array.isArray(patientsQuery.data)
+        ? patientsQuery.data
+        : patientsQuery.data?.patients || patientsQuery.data?.data || [],
+    [patientsQuery.data],
+  );
+  const appointments = useMemo(
+    () =>
+      Array.isArray(appointmentsQuery.data)
+        ? appointmentsQuery.data
+        : appointmentsQuery.data?.appointments ||
+          appointmentsQuery.data?.data ||
+          [],
+    [appointmentsQuery.data],
+  );
   const todayKey = formatLocalDate(new Date());
-  const todayAppointments = useMemo(() => appointments.filter((appointment) => formatLocalDate(new Date(appointment.scheduled_at)) === todayKey), [appointments, todayKey]);
-  const upcomingAppointments = useMemo(() => appointments.filter((appointment) => new Date(appointment.scheduled_at) > new Date()), [appointments]);
+  const todayAppointments = useMemo(
+    () =>
+      appointments.filter(
+        (appointment) =>
+          formatLocalDate(new Date(appointment.scheduled_at)) === todayKey,
+      ),
+    [appointments, todayKey],
+  );
+  const upcomingAppointments = useMemo(
+    () =>
+      appointments.filter(
+        (appointment) => new Date(appointment.scheduled_at) > new Date(),
+      ),
+    [appointments],
+  );
   const loading = patientsQuery.isLoading || appointmentsQuery.isLoading;
   const error = patientsQuery.error || appointmentsQuery.error;
+  const greeting = getGreeting(new Date());
 
   if (loading) {
     return (
@@ -61,7 +89,7 @@ const Dashboard = () => {
       ======================================== */}
       <section>
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-          Good morning
+          {greeting}
           {user?.name ? `, ${user.name}` : ""} 👋
         </h1>
 
@@ -155,6 +183,14 @@ const formatLocalDate = (date) => {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+};
+
+const getGreeting = (date) => {
+  const hour = date.getHours();
+
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
 };
 
 /* ============================================
